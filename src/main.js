@@ -4,12 +4,13 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { Axios } from 'axios';
 
 const searchForm = document.querySelector('.search-form');
 const markupList = document.querySelector('.gallery-list');
 const loader = document.querySelector('.loader');
 
-searchForm.addEventListener('submit', event => {
+searchForm.addEventListener('submit', async event => {
   event.preventDefault();
 
   const inputValue = event.target.elements.search.value;
@@ -19,24 +20,22 @@ searchForm.addEventListener('submit', event => {
     markupList.innerHTML = '';
   } else {
     showLoader();
-    getImage(inputValue)
-      .then(data => {
-        if (data.hits.length === 0) {
-          markupList.innerHTML = '';
-          createMessage(
-            'Sorry',
-            'there are no images matching your search query. Please try again!'
-          );
-        }
-        const markup = renderMarkup(data.hits);
-        markupList.innerHTML = markup;
-        lightbox.refresh();
-      })
-      .catch(err => {})
-      .finally(() => {
-        hideLoader();
-      });
-
+    try {
+      const data = await getImage(inputValue);
+      if (data.hits.length === 0) {
+        markupList.innerHTML = '';
+        createMessage(
+          'Sorry',
+          'there are no images matching your search query. Please try again!'
+        );
+      }
+      const markup = renderMarkup(data.hits);
+      markupList.innerHTML = markup;
+      lightbox.refresh();
+    } catch (err) {
+      err => {};
+    }
+    hideLoader();
     searchForm.reset();
   }
 });
