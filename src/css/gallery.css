@@ -1,5 +1,6 @@
 .gallery-list {
   margin: 0 auto;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -16,9 +17,6 @@
 .image-desc-list {
   display: flex;
   justify-content: space-evenly;
-}
-
-.gallery-image {
 }
 
 .gallery-card:hover {

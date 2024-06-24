@@ -54,7 +54,7 @@
   letter-spacing: 0.04em;
   color: #808080;
 }
-.search-button {
+.button {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -62,8 +62,6 @@
   color: #fff;
   border-radius: 8px;
   padding: 8px 16px;
-  margin-right: 8px;
-
   border: none;
   background-color: #4e75ff;
 }
@@ -73,12 +71,18 @@
   background-color: #6c8cff;
 }
 
+.loadMore-button {
+  display: flex;
+  margin: 0 auto;
+}
+
 .loader-thumb {
   display: flex;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .is-hidden {
